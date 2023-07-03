@@ -1,4 +1,6 @@
-﻿namespace UC7.BL
+﻿using UC7.BL.Models;
+
+namespace UC7.BL
 {
     public class StudentConverter
     {

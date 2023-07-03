@@ -1,15 +1,15 @@
-﻿using UC7.BL;
+﻿using UC7.BL.Models;
 
 namespace UC7.Tests
 {
-    public class TestsFixture : IDisposable
+    public class TestsFixtureStudentConverter
     {
         public Student StudentOver21PerfectScore;
         public Student StudentLessThan21PerfectScore;
         public Student StudentWithPassingScore;
         public Student StudentWithFailingScore;
 
-        public TestsFixture()
+        public TestsFixtureStudentConverter()
         {
             StudentOver21PerfectScore = new Student()
             {
@@ -38,11 +38,6 @@ namespace UC7.Tests
                 Grade = 56,
                 Name = "Count Dooku"
             };
-        }
-
-        public void Dispose()
-        {
-            // Do "global" teardown here; Only called once.
         }
     }
 }

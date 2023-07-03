@@ -1,52 +1,54 @@
 using UC7.BL;
+using UC7.BL.Models;
 using Xunit;
 
 namespace UC7.Tests
 {
-    public class StudentConverterTests : IClassFixture<TestsFixture>
+    public class StudentConverterTests : IClassFixture<TestsFixtureStudentConverter>
     {
-        TestsFixture SetupData;
-        StudentConverter StudentConverter = new StudentConverter();
+        private TestsFixtureStudentConverter _setupData;
+        private StudentConverter _studentConverter;
 
-        public StudentConverterTests(TestsFixture setupData)
+        public StudentConverterTests(TestsFixtureStudentConverter setupData)
         {
-            SetupData = setupData;
+            _setupData = setupData;
+            _studentConverter = new StudentConverter();
         }
 
         [Fact]
         public void ConvertStudents_TakesSinglePerfectScoreStudentAged21PlusList_ReturnsHonorRollTrue()
         {
-            Assert.True(StudentConverter.ConvertStudents(GetPopulatedSingleStudentList(SetupData.StudentOver21PerfectScore)).First().HonorRoll);
+            Assert.True(_studentConverter.ConvertStudents(GetPopulatedSingleStudentList(_setupData.StudentOver21PerfectScore)).First().HonorRoll);
         }
 
         [Fact]
         public void ConvertStudents_TakesSinglePerfectScoreStudentAgedLessThan21List_ReturnsExceptionalTrue()
         {
-            Assert.True(StudentConverter.ConvertStudents(GetPopulatedSingleStudentList(SetupData.StudentLessThan21PerfectScore)).First().Exceptional);
+            Assert.True(_studentConverter.ConvertStudents(GetPopulatedSingleStudentList(_setupData.StudentLessThan21PerfectScore)).First().Exceptional);
         }
 
         [Fact]
         public void ConvertStudents_TakesSinglePassingScoreStudentList_ReturnsPassedTrue()
         {
-            Assert.True(StudentConverter.ConvertStudents(GetPopulatedSingleStudentList(SetupData.StudentWithPassingScore)).First().Passed);
+            Assert.True(_studentConverter.ConvertStudents(GetPopulatedSingleStudentList(_setupData.StudentWithPassingScore)).First().Passed);
         }
 
         [Fact]
         public void ConvertStudents_TakesSingleFailingScoreStudentList_ReturnsPassedTrue()
         {
-            Assert.False(StudentConverter.ConvertStudents(GetPopulatedSingleStudentList(SetupData.StudentWithFailingScore)).First().Passed);
+            Assert.False(_studentConverter.ConvertStudents(GetPopulatedSingleStudentList(_setupData.StudentWithFailingScore)).First().Passed);
         }
 
         [Fact]
         public void ConvertStudents_TakesEmptyList_ReturnsEmptyList()
         {
-            Assert.Empty(StudentConverter.ConvertStudents(new List<Student>()));
+            Assert.Empty(_studentConverter.ConvertStudents(new List<Student>()));
         }
 
         [Fact]
         public void ConvertStudents_TakesNull_ThrowsError()
         {
-            Assert.Throws<ArgumentNullException>(() => StudentConverter.ConvertStudents(null));
+            Assert.Throws<ArgumentNullException>(() => _studentConverter.ConvertStudents(null));
         }
 
         private List<Student> GetPopulatedSingleStudentList(Student student)

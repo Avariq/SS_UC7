@@ -1,4 +1,4 @@
-﻿namespace UC7.BL
+﻿namespace UC7.BL.Models
 {
     public class Student
     {
